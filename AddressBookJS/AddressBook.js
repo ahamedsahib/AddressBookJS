@@ -7,7 +7,7 @@ var choice;
 var addressbook=new Array();
 do
 {
-    console.log("Choose what u want to do \n1.Add New Contact to addressbook \n2.Update Contact details \n3.Delete Contact\n4.Display Contacts \n5.Exit\n");
+    console.log("Choose what u want to do \n1.Add New Contact to addressbook \n2.Update Contact details \n3.Delete Contact\n4.Display Contacts \n5.Total Contacts in Address Book\n6.Exit\n");
     var option = parseInt(prompt('Enter the Number : '));
 
     switch(option)
@@ -29,11 +29,16 @@ do
             console.log("---Delete Contact----");
             DeleteContact(addressbook);
             break;
+        case 5:
+            console.log("---Total contacts------");
+            //count the number of contacts using reduce method
+            console.log(`Total contacts${addressbook.reduce((totalContacts) => totalContacts+=1,0)}`);
+            break;
         default:
             console.log("Exited");
             break;
     }
-}while(option <5)//iterate until user want to exit 
+}while(option <6)//iterate until user want to exit 
 function AddContact(addressbook)
 { 
     do
