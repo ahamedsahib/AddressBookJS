@@ -8,7 +8,7 @@ var addressbook=new Array();
 do
 {
     console.log('---------MENU---------');
-    console.log("Choose what u want to do \n1.Add New Contact to addressbook \n2.Update Contact details \n3.Delete Contact\n4.Display Contacts \n5.Total Contacts in Address Book\n6.Search Contact based on city or state name\n7.View Contact by State and City\n8.Exit\n");
+    console.log("Choose what u want to do \n1.Add New Contact to addressbook \n2.Update Contact details \n3.Delete Contact\n4.Display Contacts \n5.Total Contacts in Address Book\n6.Search Contact based on city or state name\n7.View and Count Contact by State and City\n8.Exit\n");
     var option = parseInt(prompt('Enter the Number : '));
 
     switch(option)
@@ -217,12 +217,12 @@ function ViewContactByCityAndState(addressbook){
 })
 for(let [key,value] of cityMap)
 {
-    console.log(`The contacts in ${key} city`);
+    console.log(`The contacts in ${key} city has ${value.length} Contacts`);
     Display(value);
 }
 for(let [key,value] of stateMap)
 {
-    console.log(`Contacts in ${key} state`);
+    console.log(`Contacts in ${key} state has ${value.length} Contacts`);
     Display(value);
 }
 
