@@ -7,7 +7,8 @@ var choice;
 var addressbook=new Array();
 do
 {
-    console.log("Choose what u want to do \n1.Add New Contact to addressbook \n2.Update Contact details \n3.Delete Contact\n4.Display Contacts \n5.Total Contacts in Address Book\n6.Exit\n");
+    console.log('---------MENU---------');
+    console.log("Choose what u want to do \n1.Add New Contact to addressbook \n2.Update Contact details \n3.Delete Contact\n4.Display Contacts \n5.Total Contacts in Address Book\n6.Search Contact based on city or state name\n7.Exit\n");
     var option = parseInt(prompt('Enter the Number : '));
 
     switch(option)
@@ -34,11 +35,20 @@ do
             //count the number of contacts using reduce method
             console.log(`Total contacts${addressbook.reduce((totalContacts) => totalContacts+=1,0)}`);
             break;
+        case 6:
+            console.log("----Search Contacts based on city or state name--------");
+            console.log('1.Using City Name \n2.Using State Name');
+            var opt = Number(prompt('Choose anyone you want to fetch Contacts: '));
+            if(opt == 1)
+                SearchCity(addressbook);
+            else
+                SearchState(addressbook);
+             break;
         default:
             console.log("Exited");
             break;
     }
-}while(option <6)//iterate until user want to exit 
+}while(option <7)//iterate until user want to exit 
 function AddContact(addressbook)
 { 
     do
@@ -150,6 +160,31 @@ function DeleteContact(addressbook)
     }
     else
         console.log("No Such contacts found!");
+}
+
+function SearchCity(addressbook)
+{
+    var cityname= prompt('Enter city name : ');
+    var result = addressbook.filter(x=>x.City == cityname);
+    if(result.length>0)
+    {
+        console.log(`Contacts on ${cityname} city `);
+        Display(result);
+    }
+    else 
+      console.log(` No Contacts found on ${cityname} city `);
+}
+function SearchState(addressbook)
+{
+    var statename= prompt('Enter state name : ');
+    var result = addressbook.filter(x=>x.State == statename);
+    if(result.length>0)
+    {
+        console.log(`Contacts on ${statename} state `);
+        Display(result);
+    }
+    else 
+      console.log(` No Contacts found on ${statename} state `);
 }
 //print the contacts in addressbook array
 function Display(addressbook)
