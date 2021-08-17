@@ -7,7 +7,7 @@ var choice;
 var addressbook=new Array();
 do
 {
-    console.log("Choose what u want to do \n1.Add New Contact to addressbook \n2.Update Contact details \n3.Display Contacts \n3.Exit\n");
+    console.log("Choose what u want to do \n1.Add New Contact to addressbook \n2.Update Contact details \n3.Delete Contact\n4.Display Contacts \n5.Exit\n");
     var option = parseInt(prompt('Enter the Number : '));
 
     switch(option)
@@ -25,14 +25,17 @@ do
             console.log("---Display Address Book----");
             Display(addressbook);
             break;
+        case 4:
+            console.log("---Delete Contact----");
+            DeleteContact(addressbook);
+            break;
         default:
             console.log("Exited");
             break;
     }
-}while(option <4)//iterate until user want to exit 
+}while(option <5)//iterate until user want to exit 
 function AddContact(addressbook)
-{
-    
+{ 
     do
     {
         //create object for person class 
@@ -72,7 +75,7 @@ function UpdateContact(addressbook)
         
         do
         {
-        console.log("1.modify firstname \n2.modify lastname \n3.modify address \n4.modify city \n5.modify statename \n6.modify ZipCode \n7.modify Phone number \n8.modify email");
+        console.log("1.modify firstname \n2.modify lastname \n3.modify address \n4.modify city \n5.modify statename \n6.modify ZipCode \n7.modify Phone number \n8.modify email\n9.Back to Previous Menu");
         try{
             var option = Number(prompt('Choose Number to do modification: '));
             switch(option)
@@ -113,7 +116,7 @@ function UpdateContact(addressbook)
                     console.log("Exited!!");
                     break;
             }
-            choice=prompt(`do u want to change further change anything in this ${firstName} contact Say(y/n)`);
+            choice=prompt(`do u want to further change anything in this ${firstName} contact Say(y/n)`);
         }
         catch(ex)
         {
@@ -121,6 +124,20 @@ function UpdateContact(addressbook)
         }
         }while(choice =='Y'||choice == 'y')
     }
+}
+function DeleteContact(addressbook)
+{
+    var firstName = prompt('Enter first name :');
+    //finding the name is found in address book
+    var foundContact = address.find(x=>x.firstName == firstName);  
+    if(foundContact != null)
+    {
+        //pop out the contact from addressbook
+        addressbook.pop(foundContact);
+        console.log("Deleted ");
+    }
+    else
+        console.log("No Such contacts found!");
 }
 //print the contacts in addressbook array
 function Display(addressbook)
