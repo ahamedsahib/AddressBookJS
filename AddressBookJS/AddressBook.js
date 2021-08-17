@@ -8,7 +8,7 @@ var addressbook=new Array();
 do
 {
     console.log('---------MENU---------');
-    console.log("Choose what u want to do \n1.Add New Contact to addressbook \n2.Update Contact details \n3.Delete Contact\n4.Display Contacts \n5.Total Contacts in Address Book\n6.Search Contact based on city or state name\n7.Exit\n");
+    console.log("Choose what u want to do \n1.Add New Contact to addressbook \n2.Update Contact details \n3.Delete Contact\n4.Display Contacts \n5.Total Contacts in Address Book\n6.Search Contact based on city or state name\n7.View Contact by State and City\n8.Exit\n");
     var option = parseInt(prompt('Enter the Number : '));
 
     switch(option)
@@ -44,11 +44,15 @@ do
             else
                 SearchState(addressbook);
              break;
+        case 7:
+            console.log("Contacts on State and City");
+            ViewContactByCityAndState(addressbook);
+            break;
         default:
             console.log("Exited");
             break;
     }
-}while(option <7)//iterate until user want to exit 
+}while(option <8)//iterate until user want to exit 
 function AddContact(addressbook)
 { 
     do
@@ -185,6 +189,43 @@ function SearchState(addressbook)
     }
     else 
       console.log(` No Contacts found on ${statename} state `);
+}
+function ViewContactByCityAndState(addressbook){
+    //initalizing maps on city and state to store based on state,city name
+    var cityMap = new Map();
+    var stateMap = new Map();
+    //iterating address book
+    addressbook.forEach(contact =>{
+        //initalizing array to store contacts on particular city
+        var cityarray = new Array();
+        //add to city map
+    if(cityMap.has(contact.City))
+    {
+        cityarray = cityMap.get(contact.City);
+    }
+    cityarray.push(contact);
+    cityMap.set(contact.City,cityarray);
+    //add to state map
+    //initalizing array to store contacts on particular state
+    var statearray = new Array();
+    if(stateMap.has(contact.State))
+    {
+        statearray = stateMap.get(contact.State);
+    }
+    statearray.push(contact);
+    stateMap.set(contact.State,statearray);
+})
+for(let [key,value] of cityMap)
+{
+    console.log(`The contacts in ${key} city`);
+    Display(value);
+}
+for(let [key,value] of stateMap)
+{
+    console.log(`Contacts in ${key} state`);
+    Display(value);
+}
+
 }
 //print the contacts in addressbook array
 function Display(addressbook)
