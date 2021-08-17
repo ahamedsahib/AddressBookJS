@@ -50,16 +50,23 @@ function AddContact(addressbook)
             //reading data from user
             person.firstName = prompt('Enter first name : ');
             person.lastName = prompt('Enter last name : ');
-            person.address = prompt('Enter address : ');
-            person.City = prompt('Enter city name : ');
-            person.State = prompt('Enter state name : ');
-            person.zip = prompt('Enter ZipCode: ')
-            person.phone = prompt('Enter phone number : ');
-            person.email = prompt('Enter email Id : ');
-            //store the details in addressbook array
-            addressbook.push(person);
-            //asking user to want to add another contact 
-            choice=prompt('do u want to add another Contact Say(y/n)');
+            if(addressbook.find(x=>x.firstName == person.firstName && x.lastName==person.lastName)==undefined)
+            {
+                person.address = prompt('Enter address : ');
+                person.City = prompt('Enter city name : ');
+                person.State = prompt('Enter state name : ');
+                person.zip = prompt('Enter ZipCode: ')
+                person.phone = prompt('Enter phone number : ');
+                person.email = prompt('Enter email Id : '); 
+               //store the details in addressbook array
+                addressbook.push(person);
+                //asking user to want to add another contact 
+                choice=prompt('do u want to add another Contact Say(y/n)');
+            }
+            else
+            {
+                console.log('Name Already exists try Changing name');
+            }
 
         }
         catch(ex)//catch exception 

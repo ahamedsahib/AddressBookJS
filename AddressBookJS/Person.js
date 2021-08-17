@@ -74,7 +74,7 @@ class Person{
         return this._email;
     }
     set email(value){
-        let emailPattern = /^abc([+.-_]{1}\w+)?@[a-z0-9]+\.[a-z]{2,3}(\.[a-z]{2})?$/;
+        let emailPattern = /^[a-z]{3,}([+.-_]{1}\w+)?@[a-z0-9]+\.[a-z]{2,3}(\.[a-z]{2})?$/;
         if(emailPattern.test(value))
         this._email = value;
         else
