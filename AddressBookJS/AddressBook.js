@@ -2,11 +2,12 @@
 const {Person} = require('./Person');
 
 var prompt = require('prompt-sync')();
+var choice;
 //initalizing array to store all contacts
 var addressbook=new Array();
 do
 {
-    console.log("Choose what u want to do \n1.Add New Contact to addressbook \n2.Display Contacts \n3.Exit\n");
+    console.log("Choose what u want to do \n1.Add New Contact to addressbook \n2.Update Contact details \n3.Display Contacts \n3.Exit\n");
     var option = parseInt(prompt('Enter the Number : '));
 
     switch(option)
@@ -17,6 +18,10 @@ do
             AddContact(addressbook);
             break;
         case 2:
+            console.log('-----Edit Contact------');
+            UpdateContact(addressbook);
+            break;
+        case 3:
             console.log("---Display Address Book----");
             Display(addressbook);
             break;
@@ -24,10 +29,10 @@ do
             console.log("Exited");
             break;
     }
-}while(option <3)//iterate until user want to exit 
+}while(option <4)//iterate until user want to exit 
 function AddContact(addressbook)
 {
-    let choice;
+    
     do
     {
         //create object for person class 
@@ -54,6 +59,68 @@ function AddContact(addressbook)
             console.log(ex);
         }
     }while(choice =='Y'||choice == 'y')
+}
+//UC-4 Modify existing details
+function UpdateContact(addressbook)
+{   
+    var firstName = prompt('Enter first name :');
+    var modifyResult = addressbook.find(x=>x.firstName == firstName);
+    if(modifyResult == null)
+        console.log("No Such Contact Found!")
+    else
+    {
+        
+        do
+        {
+        console.log("1.modify firstname \n2.modify lastname \n3.modify address \n4.modify city \n5.modify statename \n6.modify ZipCode \n7.modify Phone number \n8.modify email");
+        try{
+            var option = Number(prompt('Choose Number to do modification: '));
+            switch(option)
+            {
+                case 1:
+                    modifyResult.firstName = prompt('Enter new First Name: ');
+                    console.log("First Name updated");
+                    break;
+                case 2:
+                    modifyResult.lastName = prompt('Enter new last Name: ');
+                    console.log("last Name updated");
+                    break;
+                case 3:
+                    modifyResult.address = prompt('Enter new address: ');
+                    console.log("address updated");
+                    break;
+                case 4:
+                    modifyResult.City = prompt('Enter new City Name: ');
+                    console.log("City Name updated");
+                    break;
+                case 5:
+                    modifyResult.State = prompt('Enter new State Name: ');
+                    console.log("State Name updated");
+                    break;
+                case 6:
+                    modifyResult.zip = prompt('Enter new zipCode: ');
+                    console.log("Zip updated");
+                    break;
+                case 7:
+                    modifyResult.phone = prompt('Enter new Phone Number: ');
+                    console.log("Phone number updated");
+                    break;
+                case 8:
+                    modifyResult.email = prompt('Enter new Email ID: ');
+                    console.log("Email Id updated");
+                    break;
+                default:
+                    console.log("Exited!!");
+                    break;
+            }
+            choice=prompt(`do u want to change further change anything in this ${firstName} contact Say(y/n)`);
+        }
+        catch(ex)
+        {
+            console.log(ex);
+        }
+        }while(choice =='Y'||choice == 'y')
+    }
 }
 //print the contacts in addressbook array
 function Display(addressbook)
