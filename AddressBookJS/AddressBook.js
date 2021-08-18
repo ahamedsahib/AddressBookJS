@@ -49,8 +49,18 @@ do
             ViewContactByCityAndState(addressbook);
             break;
         case 8:
-            console.log("Sort Contact by Name Alphabetically");
-            sortContactsBasedonName(addressbook);
+            console.log("1.Sort By Name \n2.Sort By City\n3.Sort By State\n4.Sort By ZipCode");
+            choice=parseInt(prompt('Choose Your Choice to Sort Contact: '));
+            if(choice==1)
+                sortContactBasedonName(addressbook);
+            else if(choice==2)
+                sortBasedonCity(addressbook);
+            else if(choice==3)
+                sortBasedonState(addressbook);
+            else if(choice==4)
+                sortBasedonZipCode(addressbook);
+            else
+                console.log('Choose Valid Option');
             break;
         default:
             console.log("Exited");
@@ -236,6 +246,22 @@ function ViewContactByCityAndState(addressbook)
 function sortContactBasedonName(addressbook)
 {
     addressbook.sort((x, y) => x.firstName.toUpperCase()==y.firstName.toUpperCase() ? 0 : x.firstName.toUpperCase()>y.firstName.toUpperCase()? 1 : -1);
+    Display(addressbook);
+}
+function sortBasedonCity(addressbook){
+    address.sort((x, y) => x.City.toUpperCase()==y.City.toUpperCase() ? 0 : x.City.toUpperCase()>y.City.toUpperCase()? 1 : -1);
+    Display(addressbook);
+}
+function sortBasedonState(addressbook){
+    addressbook.sort((x, y) => x.State.toUpperCase()==y.State.toUpperCase() ? 0 : x.State.toUpperCase()>y.State.toUpperCase()? 1 : -1);
+    Display(addressbook);
+}
+function sortBasedonZipCode(addressbook){
+    addressbook.sort(function (x, y) {
+        let a = parseInt(x.zip);
+            b = parseInt(y.zip);
+        return a == b ? 0 : a > b ? 1 : -1;
+    });
     Display(addressbook);
 }
 //print the contacts in addressbook array
